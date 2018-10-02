@@ -1,7 +1,6 @@
 package com.github.aistomin.guitarist.simple;
 
 import com.github.aistomin.guitarist.Question;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -18,25 +17,7 @@ public final class SimpleTestDemo {
      */
     public static void main(final String[] args) {
         final SimpleTest test = new SimpleTest(
-            () -> {
-                final ArrayList<Question> questions = new ArrayList<>();
-                questions.add(
-                    new SimpleQuestion("1 + 1 = ?", new SimpleAnswer("2"))
-                );
-                questions.add(
-                    new SimpleQuestion("3 + 6 = ?", new SimpleAnswer("9"))
-                );
-                questions.add(
-                    new SimpleQuestion("6 - 2 = ?", new SimpleAnswer("4"))
-                );
-                questions.add(
-                    new SimpleQuestion("2 * 2 = ?", new SimpleAnswer("4"))
-                );
-                questions.add(
-                    new SimpleQuestion("6 / 2 = ?", new SimpleAnswer("3"))
-                );
-                return questions;
-            }
+            new TestQuestionsProvider()
         );
         final Scanner scanner = new Scanner(System.in);
         while (test.hasMoreQuestions()) {
@@ -47,4 +28,5 @@ public final class SimpleTestDemo {
         }
         System.out.println(test.currentTestResult().toDisplayableString());
     }
+
 }
