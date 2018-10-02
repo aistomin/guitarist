@@ -25,4 +25,11 @@ public interface Question extends Displayable {
      * @return True - answered; False - isn't answered.
      */
     Boolean isAnswered();
+
+    /**
+     * Return the correct answer to the question.
+     *
+     * @return The correct answer.
+     */
+    Answer help();
 }

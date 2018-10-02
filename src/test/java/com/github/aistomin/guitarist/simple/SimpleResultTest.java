@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  * <p>
  * The tests for {@link SimpleResult}
  */
-class SimpleResultTest {
+final class SimpleResultTest {
 
     /**
      * Check that we can correctly create the simple test result if we provide
@@ -31,7 +31,8 @@ class SimpleResultTest {
             ).getMessage()
         );
         assertEquals(
-            nulls, assertThrows(
+            nulls,
+            assertThrows(
                 IllegalArgumentException.class,
                 () -> new SimpleResult(0, null, 0, 0)
             ).getMessage()

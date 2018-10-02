@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
  * <p>
  * Simple test's result.
  */
-public class SimpleResult implements Result {
+public final class SimpleResult implements Result {
 
     /**
      * The total amount of questions in the test.
@@ -93,6 +93,7 @@ public class SimpleResult implements Result {
 
     public String toDisplayableString() {
         final StringBuilder builder = new StringBuilder();
+        builder.append("\n");
         builder.append("**********************************");
         builder.append("\n");
         if (isFinished()) {

@@ -12,7 +12,7 @@ import java.util.List;
  * <p>
  * The simple implementation of {@link Test}
  */
-public class SimpleTest implements Test {
+public final class SimpleTest implements Test {
 
     /**
      * The list of the questions of the test.
