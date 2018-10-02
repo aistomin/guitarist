@@ -5,19 +5,19 @@ package com.github.aistomin.guitarist;
  * <p>
  * The interface of the test's result.
  */
-public interface Result {
+public interface Result extends Displayable {
 
     /**
-     * Convert result to the valid JSON string.
+     * Is test finished or it's just an intermediate result?
      *
-     * @return JSON string.
+     * @return True - the test is finished; False - the intermediate result.
      */
-    String toJsonString();
+    Boolean isFinished();
 
     /**
-     * Convert the result to something which can be displayed in console.
+     * Is the test passed or failed?
      *
-     * @return The displayable string.
+     * @return True - passed; False - failed.
      */
-    String toString();
+    Boolean isPassed();
 }

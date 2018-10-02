@@ -1,0 +1,21 @@
+package com.github.aistomin.guitarist;
+
+/**
+ * Created by aistomin on 02.10.18.
+ */
+public interface Displayable {
+
+    /**
+     * Convert the entity to the valid JSON string.
+     *
+     * @return JSON string.
+     */
+    String toJsonString();
+
+    /**
+     * Convert the entity to something which can be displayed in console.
+     *
+     * @return The displayable string.
+     */
+    String toDisplayableString();
+}
