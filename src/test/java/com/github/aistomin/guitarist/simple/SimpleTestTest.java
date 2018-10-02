@@ -55,4 +55,12 @@ final class SimpleTestTest {
         assertTrue(test.currentTestResult().isFinished());
         assertTrue(test.currentTestResult().isPassed());
     }
+
+    /**
+     * TODO: Issue #10. Delete this test once CI is tested.
+     */
+    @Test
+    void deleteMe() {
+        assertEquals(1, 2);
+    }
 }
