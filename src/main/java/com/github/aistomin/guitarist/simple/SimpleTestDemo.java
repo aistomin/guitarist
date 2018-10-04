@@ -28,5 +28,4 @@ public final class SimpleTestDemo {
         }
         System.out.println(test.currentTestResult().toDisplayableString());
     }
-
 }
