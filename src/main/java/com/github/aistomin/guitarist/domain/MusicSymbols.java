@@ -44,7 +44,42 @@ public enum MusicSymbols implements Displayable {
     /**
      * F clef.
      */
-    CLEF_F("\uD834\uDD22");
+    CLEF_F("\uD834\uDD22"),
+
+    /**
+     * Natural note.
+     */
+    NATURAL_NOTE("♮"),
+
+    /**
+     * Flat note.
+     */
+    FLAT_NOTE("♭"),
+
+    /**
+     * Sharp note.
+     */
+    SHARP_NOTE("♯"),
+
+    /**
+     * Double flat note.
+     */
+    DOUBLE_FLAT_NOTE("\uD834\uDD2B"),
+
+    /**
+     * Double sharp note.
+     */
+    DOUBLE_SHARP_NOTE("\uD834\uDD2A"),
+
+    /**
+     * Musical Symbol Left Repeat Sign.
+     */
+    LEFT_REPEAT("\uD834\uDD06"),
+
+    /**
+     * Musical Symbol Right Repeat Sign.
+     */
+    RIGHT_REPEAT("\uD834\uDD07");
 
     /**
      * Music symbol.
