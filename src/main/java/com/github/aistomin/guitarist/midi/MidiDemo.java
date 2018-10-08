@@ -1,10 +1,6 @@
 package com.github.aistomin.guitarist.midi;
 
-import javax.sound.midi.Instrument;
-import javax.sound.midi.MidiChannel;
-import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Synthesizer;
 
 /**
  * Created by aistomin on 08.10.18.
@@ -20,18 +16,18 @@ public final class MidiDemo {
      */
     public static void main(final String[] args) {
         try {
-            Synthesizer synth = MidiSystem.getSynthesizer();
-            synth.open();
-            Instrument[] instr = synth.getDefaultSoundbank().getInstruments();
-            MidiChannel[] mChannels = synth.getChannels();
-            synth.loadInstrument(instr[0]);
-            mChannels[0].noteOn(60, 100);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-            }
-            mChannels[0].noteOff(60);//turn of the note
-        } catch (MidiUnavailableException e) {
+            final MidiPlayer player = new MidiPlayer();
+            final int velocity = 100;
+            player.play(60, velocity);
+            player.play(62, velocity);
+            player.play(64, velocity);
+            player.play(65, velocity);
+            player.play(67, velocity);
+            player.play(69, velocity);
+            player.play(71, velocity);
+        } catch (final MidiUnavailableException ex) {
+            System.out.println("MIDI output is not available on your computer: ");
+            ex.printStackTrace();
         }
     }
 }
