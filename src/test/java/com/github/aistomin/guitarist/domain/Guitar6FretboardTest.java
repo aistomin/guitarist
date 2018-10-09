@@ -17,20 +17,11 @@ class Guitar6FretboardTest {
     private final Fretboard fretboard = new Guitar6Fretboard();
 
     /**
-     * Check that we correctly "tuned" the open strings.
-     */
-    @Test
-    void openStrings() {
-        assertEquals(Note.e_, fretboard.note(Note.e_, 0));
-        assertEquals(Note.b, fretboard.note(Note.b, 0));
-        assertEquals(Note.g, fretboard.note(Note.g, 0));
-        assertEquals(Note.d, fretboard.note(Note.d, 0));
-        assertEquals(Note.A, fretboard.note(Note.A, 0));
-        assertEquals(Note.E, fretboard.note(Note.E, 0));
-    }
-
-    /**
-     * Check common fretboard metrics.
+     * Check common fretboard metrics:
+     * 1. We correctly defined("tuned") the strings.
+     * 2. The string note is the note of the 0 fret(open string).
+     * 3. We have 12 frets + open string defined for each string.
+     * 4. 12th fret is the same note as open string, but from octave higher.
      */
     @Test
     void commonMetrics() {
@@ -41,9 +32,15 @@ class Guitar6FretboardTest {
         assertEquals(Note.d, strings.get(3));
         assertEquals(Note.A, strings.get(4));
         assertEquals(Note.E, strings.get(5));
-        final List<Note> frets = fretboard.frets(strings.get(0));
         for (final Note string : strings) {
-            assertEquals(frets.size(), fretboard.frets(string).size());
+            final List<Note> frets = fretboard.frets(string);
+            assertEquals(string, frets.get(0));
+            assertEquals(1 + 12, frets.size());
+            assertEquals(
+                string.helmholtzName().toLowerCase().replace("'", ""),
+                fretboard.note(string, 12).helmholtzName().toLowerCase()
+                    .replace("'", "")
+            );
         }
     }
 }

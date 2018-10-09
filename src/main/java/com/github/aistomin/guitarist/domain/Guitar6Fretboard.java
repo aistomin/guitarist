@@ -61,6 +61,14 @@ public final class Guitar6Fretboard implements Fretboard {
         eString.add(Note.f_sharp);
         eString.add(Note.g_);
         eString.add(Note.g_sharp);
+        eString.add(Note.a_);
+        eString.add(Note.a_sharp);
+        eString.add(Note.b_);
+        eString.add(Note.c__);
+        eString.add(Note.c__sharp);
+        eString.add(Note.d__);
+        eString.add(Note.d__sharp);
+        eString.add(Note.e__);
         return eString;
     }
 
@@ -76,6 +84,14 @@ public final class Guitar6Fretboard implements Fretboard {
         bString.add(Note.c_sharp);
         bString.add(Note.d_);
         bString.add(Note.d_sharp);
+        bString.add(Note.e_);
+        bString.add(Note.f_);
+        bString.add(Note.f_sharp);
+        bString.add(Note.g_);
+        bString.add(Note.g_sharp);
+        bString.add(Note.a_);
+        bString.add(Note.a_sharp);
+        bString.add(Note.b_);
         return bString;
     }
 
@@ -91,6 +107,14 @@ public final class Guitar6Fretboard implements Fretboard {
         gString.add(Note.a);
         gString.add(Note.a_sharp);
         gString.add(Note.b);
+        gString.add(Note.c_);
+        gString.add(Note.c_sharp);
+        gString.add(Note.d_);
+        gString.add(Note.d_sharp);
+        gString.add(Note.e_);
+        gString.add(Note.f_);
+        gString.add(Note.f_sharp);
+        gString.add(Note.g_);
         return gString;
     }
 
@@ -102,10 +126,18 @@ public final class Guitar6Fretboard implements Fretboard {
     private List<Note> dStringFrets() {
         final List<Note> dString = new ArrayList<>();
         dString.add(Note.d);
-        dString.add(Note.d_sharp);
+        dString.add(Note.dsharp);
         dString.add(Note.e);
         dString.add(Note.f);
-        dString.add(Note.f_sharp);
+        dString.add(Note.fsharp);
+        dString.add(Note.g);
+        dString.add(Note.gsharp);
+        dString.add(Note.a);
+        dString.add(Note.asharp);
+        dString.add(Note.b);
+        dString.add(Note.c_);
+        dString.add(Note.c_sharp);
+        dString.add(Note.d_);
         return dString;
     }
 
@@ -121,6 +153,14 @@ public final class Guitar6Fretboard implements Fretboard {
         AString.add(Note.B);
         AString.add(Note.c);
         AString.add(Note.csharp);
+        AString.add(Note.d);
+        AString.add(Note.dsharp);
+        AString.add(Note.e);
+        AString.add(Note.f);
+        AString.add(Note.fsharp);
+        AString.add(Note.g);
+        AString.add(Note.gsharp);
+        AString.add(Note.a);
         return AString;
     }
 
@@ -136,6 +176,14 @@ public final class Guitar6Fretboard implements Fretboard {
         EString.add(Note.Fsharp);
         EString.add(Note.G);
         EString.add(Note.Gsharp);
+        EString.add(Note.A);
+        EString.add(Note.Asharp);
+        EString.add(Note.B);
+        EString.add(Note.c);
+        EString.add(Note.csharp);
+        EString.add(Note.d);
+        EString.add(Note.dsharp);
+        EString.add(Note.e);
         return EString;
     }
 }

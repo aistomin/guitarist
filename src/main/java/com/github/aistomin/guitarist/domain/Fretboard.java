@@ -13,7 +13,7 @@ public interface Fretboard {
      * The note of the current position on the fretboard.
      *
      * @param string   The string.
-     * @param position The position on the string.
+     * @param position The position on the string. 0 - is the open string.
      * @return The corresponding note.
      */
     Note note(Note string, Integer position);
