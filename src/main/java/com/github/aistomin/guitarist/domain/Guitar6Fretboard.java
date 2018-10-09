@@ -32,11 +32,28 @@ public final class Guitar6Fretboard implements Fretboard {
 
     @Override
     public Note note(final Note string, final Integer position) {
-        return mapping.get(string).get(position);
+        final List<Note> frets = frets(string);
+        if (position < 0 || position >= frets.size()) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "Fret %d doesn't exist in %s",
+                    position, getClass().getName()
+                )
+            );
+        }
+        return frets.get(position);
     }
 
     @Override
     public List<Note> frets(final Note string) {
+        if (!strings().contains(string)) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "String %s doesn't exist in %s",
+                    string.helmholtzName(), getClass().getName()
+                )
+            );
+        }
         return mapping.get(string);
     }
 

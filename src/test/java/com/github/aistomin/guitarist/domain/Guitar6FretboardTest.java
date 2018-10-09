@@ -1,6 +1,7 @@
 package com.github.aistomin.guitarist.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +43,21 @@ class Guitar6FretboardTest {
                     .replace("'", "")
             );
         }
+    }
+
+    /**
+     * Check that class properly reacts when his client is a total idiot.
+     */
+    @Test
+    void dummyTest() {
+        assertThrows(
+            IllegalArgumentException.class, () -> fretboard.frets(Note.F)
+        );
+        assertThrows(
+            IllegalArgumentException.class, () -> fretboard.note(Note.E, -1)
+        );
+        assertThrows(
+            IllegalArgumentException.class, () -> fretboard.note(Note.g, 13)
+        );
     }
 }
