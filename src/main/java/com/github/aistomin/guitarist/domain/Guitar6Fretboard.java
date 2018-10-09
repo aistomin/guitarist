@@ -22,24 +22,12 @@ public final class Guitar6Fretboard implements Fretboard {
      */
     public Guitar6Fretboard() {
         mapping = new HashMap<>();
-        final ArrayList<Note> eString = new ArrayList<>();
-        eString.add(Note.e_);
-        mapping.put(Note.e_, eString);
-        final ArrayList<Note> bString = new ArrayList<>();
-        bString.add(Note.b);
-        mapping.put(Note.b, bString);
-        final ArrayList<Note> gString = new ArrayList<>();
-        gString.add(Note.g);
-        mapping.put(Note.g, gString);
-        final ArrayList<Note> dString = new ArrayList<>();
-        dString.add(Note.d);
-        mapping.put(Note.d, dString);
-        final ArrayList<Note> AString = new ArrayList<>();
-        AString.add(Note.A);
-        mapping.put(Note.A, AString);
-        final ArrayList<Note> EString = new ArrayList<>();
-        EString.add(Note.E);
-        mapping.put(Note.E, EString);
+        mapping.put(Note.e_, eStringFrets());
+        mapping.put(Note.b, bStringFrets());
+        mapping.put(Note.g, gStringFrets());
+        mapping.put(Note.d, dStringFrets());
+        mapping.put(Note.A, AStringFrets());
+        mapping.put(Note.E, EStringFrets());
     }
 
     @Override
@@ -59,5 +47,95 @@ public final class Guitar6Fretboard implements Fretboard {
             (o1, o2) -> -o1.compareTo(o2)
         );
         return strings;
+    }
+
+    /**
+     * The frets of the e' string.
+     *
+     * @return The frets.
+     */
+    private List<Note> eStringFrets() {
+        final List<Note> eString = new ArrayList<>();
+        eString.add(Note.e_);
+        eString.add(Note.f_);
+        eString.add(Note.f_sharp);
+        eString.add(Note.g_);
+        eString.add(Note.g_sharp);
+        return eString;
+    }
+
+    /**
+     * The frets of the b string.
+     *
+     * @return The frets.
+     */
+    private List<Note> bStringFrets() {
+        final List<Note> bString = new ArrayList<>();
+        bString.add(Note.b);
+        bString.add(Note.c_);
+        bString.add(Note.c_sharp);
+        bString.add(Note.d_);
+        bString.add(Note.d_sharp);
+        return bString;
+    }
+
+    /**
+     * The frets of the g string.
+     *
+     * @return The frets.
+     */
+    private List<Note> gStringFrets() {
+        final List<Note> gString = new ArrayList<>();
+        gString.add(Note.g);
+        gString.add(Note.gsharp);
+        gString.add(Note.a);
+        gString.add(Note.a_sharp);
+        gString.add(Note.b);
+        return gString;
+    }
+
+    /**
+     * The frets of the d string.
+     *
+     * @return The frets.
+     */
+    private List<Note> dStringFrets() {
+        final List<Note> dString = new ArrayList<>();
+        dString.add(Note.d);
+        dString.add(Note.d_sharp);
+        dString.add(Note.e);
+        dString.add(Note.f);
+        dString.add(Note.f_sharp);
+        return dString;
+    }
+
+    /**
+     * The frets of the A string.
+     *
+     * @return The frets.
+     */
+    private List<Note> AStringFrets() {
+        final List<Note> AString = new ArrayList<>();
+        AString.add(Note.A);
+        AString.add(Note.Asharp);
+        AString.add(Note.B);
+        AString.add(Note.c);
+        AString.add(Note.csharp);
+        return AString;
+    }
+
+    /**
+     * The frets of the F string.
+     *
+     * @return The frets.
+     */
+    private List<Note> EStringFrets() {
+        final List<Note> EString = new ArrayList<>();
+        EString.add(Note.E);
+        EString.add(Note.F);
+        EString.add(Note.Fsharp);
+        EString.add(Note.G);
+        EString.add(Note.Gsharp);
+        return EString;
     }
 }
