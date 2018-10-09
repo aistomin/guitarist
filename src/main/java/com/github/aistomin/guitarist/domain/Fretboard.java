@@ -15,6 +15,6 @@ public final class Fretboard {
      * @return The corresponding note.
      */
     Note note(final Note string, final Integer position) {
-        return Note.BROWN;
+        return Note.E;
     }
 }
