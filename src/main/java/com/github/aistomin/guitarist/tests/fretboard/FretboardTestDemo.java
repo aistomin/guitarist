@@ -6,4 +6,12 @@ package com.github.aistomin.guitarist.tests.fretboard;
  * The example of the fretboard test.
  */
 public final class FretboardTestDemo {
+
+    /**
+     * Runnable method.
+     *
+     * @param args Arguments.
+     */
+    public static void main(final String[] args) {
+    }
 }
