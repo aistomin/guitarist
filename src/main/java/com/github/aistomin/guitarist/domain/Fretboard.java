@@ -1,20 +1,35 @@
 package com.github.aistomin.guitarist.domain;
 
+import java.util.List;
+
 /**
- * Created by aistomin on 08.10.18.
+ * Created by aistomin on 09.10.18.
  * <p>
- * 12 frets of the 6-strings guitar in the standard tuning (E-A-D-G-B-E).
+ * String instrument's fretboard.
  */
-public final class Fretboard {
+public interface Fretboard {
 
     /**
-     * Ge the note of the current position on the fretboard.
+     * The note of the current position on the fretboard.
      *
      * @param string   The string.
-     * @param position The position on the string(1-12)
+     * @param position The position on the string.
      * @return The corresponding note.
      */
-    Note note(final Note string, final Integer position) {
-        return Note.E;
-    }
+    Note note(Note string, Integer position);
+
+    /**
+     * All the frets of the particular string.
+     *
+     * @param string The string.
+     * @return The frets.
+     */
+    List<Note> frets(Note string);
+
+    /**
+     * All the strings 0 - highest string, MAX - the lowest string.
+     *
+     * @return The open strings' notes.
+     */
+    List<Note> strings();
 }
