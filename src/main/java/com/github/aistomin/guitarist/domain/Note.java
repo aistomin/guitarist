@@ -6,6 +6,7 @@ package com.github.aistomin.guitarist.domain;
  * All the notes available on the 6-strings guitar in the standard
  * tuning (E-A-D-G-B-E). 1-12 frets. The notes are named according to Helmholtz
  * pitch notation.
+ * http://egalo.com/2012/05/03/notes-on-the-guitar-fretboard-introduction/
  */
 public enum Note {
     E,
