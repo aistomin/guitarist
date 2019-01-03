@@ -2,6 +2,7 @@ package com.github.aistomin.guitarist.simple;
 
 import com.github.aistomin.guitarist.Result;
 import java.util.HashMap;
+import java.util.Map;
 import org.json.simple.JSONObject;
 
 /**
@@ -83,7 +84,7 @@ public final class SimpleResult implements Result {
     }
 
     public String toJsonString() {
-        final HashMap<String, String> json = new HashMap<String, String>();
+        final Map<String, String> json = new HashMap<>();
         json.put("total", total.toString());
         json.put("answered", answered.toString());
         json.put("correct", correct.toString());
