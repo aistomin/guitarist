@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 /**
  * Created by aistomin on 2019-01-03.
  * <p>
- * The test for {@link PercentageBasedResult}
+ * The test for {@link SimpleResult}
  */
-class PercentageBasedResultTest {
+class SimpleResultTest {
 
     /**
      * Check that we can correctly create the simple test result if we provide
@@ -27,88 +27,88 @@ class PercentageBasedResultTest {
         assertEquals(
             nulls, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(null, 0, 0, 0)
+                () -> new SimpleResult(null, 0, 0, 0)
             ).getMessage()
         );
         assertEquals(
             nulls,
             assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(0, null, 0, 0)
+                () -> new SimpleResult(0, null, 0, 0)
             ).getMessage()
         );
         assertEquals(
             nulls, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(0, 0, null, 0)
+                () -> new SimpleResult(0, 0, null, 0)
             ).getMessage()
         );
         assertEquals(
             nulls, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(0, 0, 0, null)
+                () -> new SimpleResult(0, 0, 0, null)
             ).getMessage()
         );
         assertEquals(
             nulls,
             assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(1, 1, 1, 0, null)
+                () -> new SimpleResult(1, 1, 1, 0, null)
             ).getMessage()
         );
         final String positives = "All the constructor parameters must be positive.";
         assertEquals(
             positives, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(-1, 0, 0, 0)
+                () -> new SimpleResult(-1, 0, 0, 0)
             ).getMessage()
         );
         assertEquals(
             positives, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(0, -1, 0, 0)
+                () -> new SimpleResult(0, -1, 0, 0)
             ).getMessage()
         );
         assertEquals(
             positives, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(0, 0, -1, 0)
+                () -> new SimpleResult(0, 0, -1, 0)
             ).getMessage()
         );
         assertEquals(
             positives, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(0, 0, 0, -1)
+                () -> new SimpleResult(0, 0, 0, -1)
             ).getMessage()
         );
         final String common = "Constructor parameters must not contradict the common sense.";
         assertEquals(
             common, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(6, 7, 4, 3)
+                () -> new SimpleResult(6, 7, 4, 3)
             ).getMessage()
         );
         assertEquals(
             common, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(7, 6, 4, 3)
+                () -> new SimpleResult(7, 6, 4, 3)
             ).getMessage()
         );
         assertNotNull(
-            new PercentageBasedResult(7, 6, 4, 2).toDisplayableString()
+            new SimpleResult(7, 6, 4, 2).toDisplayableString()
         );
         final String percentage =
             "'percentage' parameter must be between 0 and 100.";
         assertEquals(
             percentage, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(1, 1, 1, 0, -1)
+                () -> new SimpleResult(1, 1, 1, 0, -1)
             ).getMessage()
         );
         assertEquals(
             percentage, assertThrows(
                 IllegalArgumentException.class,
-                () -> new PercentageBasedResult(1, 1, 1, 0, 101)
+                () -> new SimpleResult(1, 1, 1, 0, 101)
             ).getMessage()
         );
     }
@@ -119,11 +119,11 @@ class PercentageBasedResultTest {
     @Test
     void testIsFinished() {
         assertTrue(
-            new PercentageBasedResult(2, 2, 1, 1, 60)
+            new SimpleResult(2, 2, 1, 1, 60)
                 .isFinished()
         );
         assertFalse(
-            new PercentageBasedResult(3, 1, 1, 0, 50)
+            new SimpleResult(3, 1, 1, 0, 50)
                 .isFinished()
         );
     }
@@ -134,19 +134,19 @@ class PercentageBasedResultTest {
     @Test
     void testIsPassed() {
         assertFalse(
-            new PercentageBasedResult(3, 2, 2, 0, 50)
+            new SimpleResult(3, 2, 2, 0, 50)
                 .isPassed()
         );
         assertFalse(
-            new PercentageBasedResult(4, 4, 2, 2, 60)
+            new SimpleResult(4, 4, 2, 2, 60)
                 .isPassed()
         );
         assertTrue(
-            new PercentageBasedResult(5, 5, 3, 2, 50)
+            new SimpleResult(5, 5, 3, 2, 50)
                 .isPassed()
         );
         assertTrue(
-            new PercentageBasedResult(6, 6, 6, 0, 50)
+            new SimpleResult(6, 6, 6, 0, 50)
                 .isPassed()
         );
     }
@@ -164,7 +164,7 @@ class PercentageBasedResultTest {
         final int wrong = 2;
         final int percentage = 50;
         final JSONObject json = (JSONObject) new JSONParser().parse(
-            new PercentageBasedResult(
+            new SimpleResult(
                 total, answered, correct, wrong, percentage
             ).toJsonString()
         );
@@ -181,7 +181,7 @@ class PercentageBasedResultTest {
 
     @Test
     void toDisplayableString() {
-        final String partial = new PercentageBasedResult(7, 6, 4, 2, 90)
+        final String partial = new SimpleResult(7, 6, 4, 2, 90)
             .toDisplayableString();
         assertTrue(partial.contains("YOU TEST IS NOT FINISHED."));
         assertTrue(partial.contains("TOTAL: 7"));
@@ -190,14 +190,14 @@ class PercentageBasedResultTest {
         assertTrue(partial.contains("WRONG: 2"));
         assertTrue(partial.contains("PASSING PERCENTAGE: 90"));
         assertTrue(partial.contains("PLEASE CONTINUE."));
-        final String failed = new PercentageBasedResult(7, 7, 5, 2, 90)
+        final String failed = new SimpleResult(7, 7, 5, 2, 90)
             .toDisplayableString();
         assertTrue(failed.contains("YOUR TEST IS FINISHED."));
         assertTrue(failed.contains("CORRECT: 5"));
         assertTrue(failed.contains("WRONG: 2"));
         assertTrue(failed.contains("PASSING PERCENTAGE: 90"));
         assertTrue(failed.contains("PREPARE AND TRY AGAIN LATER"));
-        final String success = new PercentageBasedResult(7, 7, 5, 2, 50)
+        final String success = new SimpleResult(7, 7, 5, 2, 50)
             .toDisplayableString();
         assertTrue(success.contains("YOUR TEST IS FINISHED."));
         assertTrue(success.contains("CORRECT: 5"));

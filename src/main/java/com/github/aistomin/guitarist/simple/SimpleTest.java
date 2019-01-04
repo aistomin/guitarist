@@ -4,7 +4,7 @@ import com.github.aistomin.guitarist.Question;
 import com.github.aistomin.guitarist.QuestionsProvider;
 import com.github.aistomin.guitarist.Result;
 import com.github.aistomin.guitarist.Test;
-import com.github.aistomin.guitarist.advanced.PercentageBasedResult;
+import com.github.aistomin.guitarist.advanced.SimpleResult;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +51,7 @@ public final class SimpleTest implements Test {
         }
         final int cor = correct.size();
         final int wrg = wrong.size();
-        return new PercentageBasedResult(
+        return new SimpleResult(
             questions.size(), cor + wrg, cor, wrg
         );
     }

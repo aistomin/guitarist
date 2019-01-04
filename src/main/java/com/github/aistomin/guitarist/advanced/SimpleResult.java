@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
  * The result which allows to pass the test if certain percentage of the answers
  * is correct.
  */
-public final class PercentageBasedResult implements Result {
+public final class SimpleResult implements Result {
 
     /**
      * The total amount of questions in the test.
@@ -47,7 +47,7 @@ public final class PercentageBasedResult implements Result {
      * @param correct  The amount of correctly answered questions in the test.
      * @param wrong    The amount of wrongly answered questions in the test.
      */
-    public PercentageBasedResult(
+    public SimpleResult(
         final Integer total,
         final Integer answered,
         final Integer correct,
@@ -66,7 +66,7 @@ public final class PercentageBasedResult implements Result {
      * @param percentage The percentage of the correct answers which must be
      *                   reached to pass the test.
      */
-    public PercentageBasedResult(
+    public SimpleResult(
         final Integer total,
         final Integer answered,
         final Integer correct,
