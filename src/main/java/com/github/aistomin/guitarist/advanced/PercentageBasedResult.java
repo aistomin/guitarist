@@ -1,12 +1,9 @@
 package com.github.aistomin.guitarist.advanced;
 
 import com.github.aistomin.guitarist.Result;
-import com.github.aistomin.guitarist.simple.SimpleResult;
 import java.util.HashMap;
 import java.util.Map;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
  * Created by aistomin on 2019-01-03.
@@ -17,15 +14,47 @@ import org.json.simple.parser.ParseException;
 public final class PercentageBasedResult implements Result {
 
     /**
-     * Inner result which holds raw data of answered/unanswered questions.
+     * The total amount of questions in the test.
      */
-    private final Result inner;
+    private final Integer total;
+
+    /**
+     * The amount of answered questions in the test.
+     */
+    private final Integer answered;
+
+    /**
+     * The amount of correctly answered questions in the test.
+     */
+    private final Integer correct;
+
+    /**
+     * The amount of wrongly answered questions in the test.
+     */
+    private final Integer wrong;
 
     /**
      * The percentage of the correct answers which must be reached to pass the
      * test.
      */
     private final Integer percentage;
+
+    /**
+     * Ctor. The percentage is 100% in this case.
+     *
+     * @param total    The total amount of questions in the test.
+     * @param answered The amount of answered questions in the test.
+     * @param correct  The amount of correctly answered questions in the test.
+     * @param wrong    The amount of wrongly answered questions in the test.
+     */
+    public PercentageBasedResult(
+        final Integer total,
+        final Integer answered,
+        final Integer correct,
+        final Integer wrong
+    ) {
+        this(total, answered, correct, wrong, 100);
+    }
 
     /**
      * Ctor.
@@ -44,19 +73,10 @@ public final class PercentageBasedResult implements Result {
         final Integer wrong,
         final Integer percentage
     ) {
-        this(new SimpleResult(total, answered, correct, wrong), percentage);
-    }
-
-    /**
-     * Ctor.
-     *
-     * @param inner      Inner result which holds raw data of
-     *                   answered/unanswered questions.
-     * @param percentage The percentage of the correct answers which must be
-     *                   reached to pass the test.
-     */
-    public PercentageBasedResult(final Result inner, final Integer percentage) {
-        if (percentage == null) {
+        if (
+            total == null || answered == null ||
+                correct == null || wrong == null || percentage == null
+        ) {
             throw new IllegalArgumentException(
                 "All the constructor parameters must be provided."
             );
@@ -66,25 +86,46 @@ public final class PercentageBasedResult implements Result {
                 "'percentage' parameter must be between 0 and 100."
             );
         }
-        this.inner = inner;
+        if (
+            total < 0 || answered < 0 ||
+                correct < 0 || wrong < 0
+        ) {
+            throw new IllegalArgumentException(
+                "All the constructor parameters must be positive."
+            );
+        }
+        if (
+            total < answered || answered != (correct + wrong)
+        ) {
+            throw new IllegalArgumentException(
+                "Constructor parameters must not contradict the common sense."
+            );
+        }
+        this.total = total;
+        this.answered = answered;
+        this.correct = correct;
+        this.wrong = wrong;
         this.percentage = percentage;
     }
 
     @Override
     public Boolean isFinished() {
-        return this.inner.isFinished();
+        return total.equals(answered);
     }
 
     @Override
     public Boolean isPassed() {
         return isFinished() &&
-            (innerValue("correct") * 100) / innerValue("total") >= percentage;
+            (this.correct * 100) / this.total >= percentage;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public String toJsonString() throws ParseException {
-        final Map<String, String> json = new HashMap<String, String>(innerJson());
+    public String toJsonString() {
+        final Map<String, String> json = new HashMap<>();
+        json.put("total", total.toString());
+        json.put("answered", answered.toString());
+        json.put("correct", correct.toString());
+        json.put("wrong", wrong.toString());
         json.put("percentage", percentage.toString());
         return new JSONObject(json).toJSONString();
     }
@@ -102,14 +143,14 @@ public final class PercentageBasedResult implements Result {
             builder.append(
                 String.format(
                     "YOU TEST IS NOT FINISHED. \nTOTAL: %d, \nANSWERED: %d",
-                    innerValue("total"), innerValue("answered")
+                    this.total, this.answered
                 )
             );
             builder.append("\n");
         }
-        builder.append(String.format("CORRECT: %d", innerValue("correct")));
+        builder.append(String.format("CORRECT: %d", this.correct));
         builder.append("\n");
-        builder.append(String.format("WRONG: %d", innerValue("wrong")));
+        builder.append(String.format("WRONG: %d", this.wrong));
         builder.append("\n");
         builder.append(String.format("PASSING PERCENTAGE: %d", this.percentage));
         builder.append("\n");
@@ -125,41 +166,5 @@ public final class PercentageBasedResult implements Result {
         }
         builder.append("**********************************");
         return builder.toString();
-    }
-
-    /**
-     * Load the value from the inner result's JSON
-     *
-     * @param key The property's key.
-     * @return The value.
-     */
-    private Integer innerValue(final String key) {
-        try {
-            final JSONObject json = innerJson();
-            if (!json.containsKey(key)) {
-                throw new IllegalArgumentException(
-                    String.format(
-                        "Key '%s' is missing in the inner result.", key
-                    )
-                );
-            }
-            return Integer.parseInt(((String) json.get(key)));
-        } catch (final ParseException error) {
-            throw new IllegalStateException(
-                String.format(
-                    "Can not get key '%s' from the inner result.", key
-                ), error
-            );
-        }
-    }
-
-    /**
-     * Get the inner result's JSON.
-     *
-     * @return The JSON object.
-     * @throws ParseException If JSON was not successfully parsed.
-     */
-    private JSONObject innerJson() throws ParseException {
-        return (JSONObject) new JSONParser().parse(this.inner.toJsonString());
     }
 }
