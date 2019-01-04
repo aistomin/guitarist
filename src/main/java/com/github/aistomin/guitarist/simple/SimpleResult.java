@@ -1,4 +1,4 @@
-package com.github.aistomin.guitarist.advanced;
+package com.github.aistomin.guitarist.simple;
 
 import com.github.aistomin.guitarist.Result;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.github.aistomin.guitarist.advanced;
+package com.github.aistomin.guitarist.simple;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -4,7 +4,6 @@ import com.github.aistomin.guitarist.Question;
 import com.github.aistomin.guitarist.QuestionsProvider;
 import com.github.aistomin.guitarist.Result;
 import com.github.aistomin.guitarist.Test;
-import com.github.aistomin.guitarist.advanced.SimpleResult;
 import java.util.ArrayList;
 import java.util.List;
 
