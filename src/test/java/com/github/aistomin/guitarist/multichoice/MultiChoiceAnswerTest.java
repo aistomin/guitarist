@@ -11,6 +11,7 @@ import static com.github.aistomin.guitarist.multichoice.Choice.L;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.json.simple.JSONObject;
@@ -30,20 +31,11 @@ final class MultiChoiceAnswerTest {
      */
     @Test
     void validate() {
-        final Set<Choice> expected = new HashSet<>();
-        expected.add(G);
-        expected.add(F);
-        expected.add(E);
-        final Set<Choice> correct = new HashSet<>();
-        correct.add(F);
-        correct.add(E);
-        correct.add(G);
+        final Set<Choice> expected = new HashSet<>(Arrays.asList(G, F, E));
+        final Set<Choice> correct = new HashSet<>(Arrays.asList(F, E, G));
         final MultiChoiceAnswer answer = new MultiChoiceAnswer(expected);
         assertTrue(answer.validate(new MultiChoiceAnswer(correct)));
-        final Set<Choice> incorrect = new HashSet<>();
-        incorrect.add(F);
-        incorrect.add(L);
-        incorrect.add(G);
+        final Set<Choice> incorrect = new HashSet<>(Arrays.asList(F, L, G));
         assertFalse(answer.validate(new MultiChoiceAnswer(incorrect)));
         assertFalse(answer.validate(null));
     }
@@ -55,9 +47,7 @@ final class MultiChoiceAnswerTest {
      */
     @Test
     void toJsonString() throws ParseException {
-        final Set<Choice> selected = new HashSet<>();
-        selected.add(C);
-        selected.add(D);
+        final Set<Choice> selected = new HashSet<>(Arrays.asList(C, D));
         assertEquals(
             "C; D",
             (
@@ -72,10 +62,7 @@ final class MultiChoiceAnswerTest {
      */
     @Test
     void toDisplayableString() {
-        final Set<Choice> selected = new HashSet<>();
-        selected.add(A);
-        selected.add(F);
-        selected.add(B);
+        final Set<Choice> selected = new HashSet<>(Arrays.asList(A, F, B));
         assertEquals(
             "A; B; F", new MultiChoiceAnswer(selected).toDisplayableString()
         );
