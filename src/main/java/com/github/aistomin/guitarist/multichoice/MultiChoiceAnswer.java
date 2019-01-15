@@ -19,14 +19,14 @@ public class MultiChoiceAnswer implements Answer {
     /**
      * The options selected by user.
      */
-    private final Set<String> selected;
+    private final Set<Choice> selected;
 
     /**
      * Ctor.
      *
      * @param selected The options selected by user.
      */
-    public MultiChoiceAnswer(final Set<String> selected) {
+    public MultiChoiceAnswer(final Set<Choice> selected) {
         this.selected = selected;
     }
 
@@ -45,8 +45,8 @@ public class MultiChoiceAnswer implements Answer {
 
     @Override
     public String toDisplayableString() {
-        final List<String> sorted = new ArrayList<>(selected);
+        final List<Choice> sorted = new ArrayList<>(selected);
         sorted.sort(Comparator.naturalOrder());
-        return String.join("; ", sorted);
+        return sorted.stream().map(Enum::name).collect(Collectors.joining("; "));
     }
 }

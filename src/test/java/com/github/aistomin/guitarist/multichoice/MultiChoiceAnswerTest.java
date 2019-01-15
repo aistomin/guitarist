@@ -1,5 +1,13 @@
 package com.github.aistomin.guitarist.multichoice;
 
+import static com.github.aistomin.guitarist.multichoice.Choice.A;
+import static com.github.aistomin.guitarist.multichoice.Choice.B;
+import static com.github.aistomin.guitarist.multichoice.Choice.C;
+import static com.github.aistomin.guitarist.multichoice.Choice.D;
+import static com.github.aistomin.guitarist.multichoice.Choice.E;
+import static com.github.aistomin.guitarist.multichoice.Choice.F;
+import static com.github.aistomin.guitarist.multichoice.Choice.G;
+import static com.github.aistomin.guitarist.multichoice.Choice.L;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,20 +30,20 @@ final class MultiChoiceAnswerTest {
      */
     @Test
     void validate() {
-        final Set<String> expected = new HashSet<>();
-        expected.add("G");
-        expected.add("F");
-        expected.add("E");
-        final Set<String> correct = new HashSet<>();
-        correct.add("F");
-        correct.add("E");
-        correct.add("G");
+        final Set<Choice> expected = new HashSet<>();
+        expected.add(G);
+        expected.add(F);
+        expected.add(E);
+        final Set<Choice> correct = new HashSet<>();
+        correct.add(F);
+        correct.add(E);
+        correct.add(G);
         final MultiChoiceAnswer answer = new MultiChoiceAnswer(expected);
         assertTrue(answer.validate(new MultiChoiceAnswer(correct)));
-        final Set<String> incorrect = new HashSet<>();
-        incorrect.add("F");
-        incorrect.add("L");
-        incorrect.add("G");
+        final Set<Choice> incorrect = new HashSet<>();
+        incorrect.add(F);
+        incorrect.add(L);
+        incorrect.add(G);
         assertFalse(answer.validate(new MultiChoiceAnswer(incorrect)));
         assertFalse(answer.validate(null));
     }
@@ -47,9 +55,9 @@ final class MultiChoiceAnswerTest {
      */
     @Test
     void toJsonString() throws ParseException {
-        final Set<String> selected = new HashSet<>();
-        selected.add("C");
-        selected.add("D");
+        final Set<Choice> selected = new HashSet<>();
+        selected.add(C);
+        selected.add(D);
         assertEquals(
             "C; D",
             (
@@ -64,10 +72,10 @@ final class MultiChoiceAnswerTest {
      */
     @Test
     void toDisplayableString() {
-        final Set<String> selected = new HashSet<>();
-        selected.add("A");
-        selected.add("F");
-        selected.add("B");
+        final Set<Choice> selected = new HashSet<>();
+        selected.add(A);
+        selected.add(F);
+        selected.add(B);
         assertEquals(
             "A; B; F", new MultiChoiceAnswer(selected).toDisplayableString()
         );
