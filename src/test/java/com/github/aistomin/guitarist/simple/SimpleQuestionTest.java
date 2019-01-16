@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +23,7 @@ final class SimpleQuestionTest {
     void answer() {
         final SimpleAnswer expected = new SimpleAnswer("Andrej");
         final SimpleQuestion wrong = new SimpleQuestion(
-            "What is your name?", expected
+            new SimpleText("What is your name?"), expected
         );
         assertEquals(expected, wrong.help());
         assertFalse(wrong.isAnswered());
@@ -41,7 +40,7 @@ final class SimpleQuestionTest {
         );
         final String answer = "Istomin";
         final SimpleQuestion correct = new SimpleQuestion(
-            "What is your surname?", new SimpleAnswer(answer)
+            new SimpleText("What is your surname?"), new SimpleAnswer(answer)
         );
         assertFalse(correct.isAnswered());
         assertFalse(correct.isCorrect());
@@ -60,20 +59,22 @@ final class SimpleQuestionTest {
         final String question = "Who are you?";
         final String answer = "It's me";
         final SimpleQuestion test = new SimpleQuestion(
-            question, new SimpleAnswer(answer)
+            new SimpleText(question), new SimpleAnswer(answer)
         );
-        final JSONObject unanswered =
-            (JSONObject) new JSONParser().parse(test.toJsonString());
-        assertEquals(question, unanswered.get("text"));
+        final JSONObject unanswered = test.toJson();
+        assertEquals(
+            question, ((JSONObject) unanswered.get("question")).get("text")
+        );
         assertEquals(
             answer, ((JSONObject) unanswered.get("expected")).get("text")
         );
         assertNull(unanswered.get("got"));
         final String wrong = "It's he";
         test.answer(new SimpleAnswer(wrong));
-        final JSONObject answered =
-            (JSONObject) new JSONParser().parse(test.toJsonString());
-        assertEquals(question, answered.get("text"));
+        final JSONObject answered = test.toJson();
+        assertEquals(
+            question, ((JSONObject) answered.get("question")).get("text")
+        );
         assertEquals(
             answer, ((JSONObject) answered.get("expected")).get("text")
         );
@@ -88,7 +89,7 @@ final class SimpleQuestionTest {
         final String question = "How old are you?";
         final String answer = "33";
         final SimpleQuestion test = new SimpleQuestion(
-            question, new SimpleAnswer(answer)
+            new SimpleText(question), new SimpleAnswer(answer)
         );
         final String unanswered = test.toDisplayableString();
         assertTrue(unanswered.contains(question));

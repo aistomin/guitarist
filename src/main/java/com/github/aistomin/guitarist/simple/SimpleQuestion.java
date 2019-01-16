@@ -2,10 +2,9 @@ package com.github.aistomin.guitarist.simple;
 
 import com.github.aistomin.guitarist.Answer;
 import com.github.aistomin.guitarist.Question;
+import com.github.aistomin.guitarist.QuestionsText;
 import java.util.HashMap;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
  * Created by aistomin on 02.10.18.
@@ -15,7 +14,7 @@ public final class SimpleQuestion implements Question {
     /**
      * Question's text.
      */
-    private final String text;
+    private final QuestionsText text;
 
     /**
      * Expected answer.
@@ -33,7 +32,7 @@ public final class SimpleQuestion implements Question {
      * @param text   Question's text.
      * @param answer Expected answer to the question.
      */
-    public SimpleQuestion(final String text, final Answer answer) {
+    public SimpleQuestion(final QuestionsText text, final Answer answer) {
         this.text = text;
         this.expected = answer;
     }
@@ -62,14 +61,14 @@ public final class SimpleQuestion implements Question {
     }
 
     @Override
-    public synchronized String toJsonString() throws ParseException {
+    public synchronized JSONObject toJson() {
         final HashMap<String, Object> json = new HashMap<>();
-        json.put("text", text);
-        json.put("expected", new JSONParser().parse(expected.toJsonString()));
+        json.put("question", text.toJson());
+        json.put("expected", expected.toJson());
         if (isAnswered()) {
-            json.put("got", new JSONParser().parse(got.toJsonString()));
+            json.put("got", got.toJson());
         }
-        return new JSONObject(json).toJSONString();
+        return new JSONObject(json);
     }
 
     @Override
@@ -78,7 +77,7 @@ public final class SimpleQuestion implements Question {
         builder.append("\n");
         builder.append("**********************************");
         builder.append("\n");
-        builder.append(text);
+        builder.append(text.toDisplayableString());
         builder.append("\n");
         if (isAnswered()) {
             if (isCorrect()) {

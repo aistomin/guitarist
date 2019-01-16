@@ -3,9 +3,6 @@ package com.github.aistomin.guitarist.simple;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -29,19 +26,11 @@ final class SimpleAnswerTest {
 
     /**
      * Check that we correctly convert the answer to the JSON string.
-     *
-     * @throws ParseException On JSON parsing exception.
      */
     @Test
-    void toJsonString() throws ParseException {
+    void toJsonString() {
         final String expected = "Expected answer";
-        assertEquals(
-            expected,
-            (
-                (JSONObject) new JSONParser()
-                    .parse(new SimpleAnswer(expected).toJsonString())
-            ).get("text")
-        );
+        assertEquals(expected, new SimpleAnswer(expected).toJson().get("text"));
     }
 
     /**

@@ -120,14 +120,14 @@ public final class SimpleResult implements Result {
     }
 
     @Override
-    public String toJsonString() {
+    public JSONObject toJson() {
         final Map<String, String> json = new HashMap<>();
         json.put("total", total.toString());
         json.put("answered", answered.toString());
         json.put("correct", correct.toString());
         json.put("wrong", wrong.toString());
         json.put("percentage", percentage.toString());
-        return new JSONObject(json).toJSONString();
+        return new JSONObject(json);
     }
 
     @Override

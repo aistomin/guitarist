@@ -37,10 +37,10 @@ public class MultiChoiceAnswer implements Answer {
     }
 
     @Override
-    public String toJsonString() {
+    public JSONObject toJson() {
         final HashMap<String, String> json = new HashMap<>();
         json.put("text", this.toDisplayableString());
-        return new JSONObject(json).toJSONString();
+        return new JSONObject(json);
     }
 
     @Override

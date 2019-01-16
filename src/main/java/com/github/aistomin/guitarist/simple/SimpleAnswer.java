@@ -31,10 +31,10 @@ public final class SimpleAnswer implements Answer {
     }
 
     @Override
-    public String toJsonString() {
+    public JSONObject toJson() {
         final HashMap<String, String> json = new HashMap<>();
         json.put("text", text);
-        return new JSONObject(json).toJSONString();
+        return new JSONObject(json);
     }
 
     @Override

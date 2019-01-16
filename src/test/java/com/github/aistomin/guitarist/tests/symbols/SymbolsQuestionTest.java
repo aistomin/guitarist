@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.github.aistomin.guitarist.domain.MusicSymbol;
 import com.github.aistomin.guitarist.simple.SimpleAnswer;
-import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -49,14 +48,12 @@ class SymbolsQuestionTest {
 
     /**
      * Check the JSON serialisation works.
-     *
-     * @throws ParseException If JSON error occurred.
      */
     @Test
-    void toJsonString() throws ParseException {
+    void toJsonString() {
         final MusicSymbol symbol = MusicSymbol.random();
         assertTrue(
-            new SymbolsQuestion(symbol).toJsonString()
+            new SymbolsQuestion(symbol).toJson().toJSONString()
                 .contains(symbol.description())
         );
     }

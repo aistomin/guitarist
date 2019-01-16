@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -33,13 +31,10 @@ class MusicSymbolTest {
 
     /**
      * Check that we correctly convert the entity to JSON string.
-     *
-     * @throws ParseException If JSON paring exception occurred.
      */
     @Test
-    void toJsonString() throws ParseException {
-        final JSONObject json = (JSONObject) new JSONParser()
-            .parse(MusicSymbol.FERMATA.toJsonString());
+    void toJsonString() {
+        final JSONObject json = MusicSymbol.FERMATA.toJson();
         assertEquals("FERMATA", json.get("name"));
         assertEquals("Fermata", json.get("description"));
         assertEquals("\uD834\uDD10", json.get("symbol"));

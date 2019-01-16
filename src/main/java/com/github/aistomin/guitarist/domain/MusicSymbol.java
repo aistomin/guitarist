@@ -165,12 +165,12 @@ public enum MusicSymbol implements Displayable {
     }
 
     @Override
-    public String toJsonString() {
+    public JSONObject toJson() {
         final HashMap<String, String> json = new HashMap<>();
         json.put("name", name());
         json.put("symbol", symbol());
         json.put("description", description());
-        return new JSONObject(json).toJSONString();
+        return new JSONObject(json);
     }
 
     @Override

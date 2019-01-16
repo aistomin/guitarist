@@ -6,7 +6,8 @@ import com.github.aistomin.guitarist.domain.Fretboard;
 import com.github.aistomin.guitarist.domain.Note;
 import com.github.aistomin.guitarist.simple.SimpleAnswer;
 import com.github.aistomin.guitarist.simple.SimpleQuestion;
-import org.json.simple.parser.ParseException;
+import com.github.aistomin.guitarist.simple.SimpleText;
+import org.json.simple.JSONObject;
 
 /**
  * Created by aistomin on 10.10.18.
@@ -29,9 +30,11 @@ public class FretboardQuestion implements Question {
         final Note string, final Integer position, final Fretboard fretboard
     ) {
         this.simple = new SimpleQuestion(
-            String.format(
-                "Which note do we have on the %s string fret #%d?",
-                string.helmholtzName(), position
+            new SimpleText(
+                String.format(
+                    "Which note do we have on the %s string fret #%d?",
+                    string.helmholtzName(), position
+                )
             ),
             new SimpleAnswer(fretboard.note(string, position).helmholtzName())
         );
@@ -58,8 +61,8 @@ public class FretboardQuestion implements Question {
     }
 
     @Override
-    public String toJsonString() throws ParseException {
-        return simple.toJsonString();
+    public JSONObject toJson() {
+        return simple.toJson();
     }
 
     @Override

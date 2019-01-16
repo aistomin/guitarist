@@ -14,9 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -42,18 +39,12 @@ final class MultiChoiceAnswerTest {
 
     /**
      * Check that we correctly convert the answer to the JSON string.
-     *
-     * @throws ParseException On JSON parsing exception.
      */
     @Test
-    void toJsonString() throws ParseException {
+    void toJsonString() {
         final Set<Choice> selected = new HashSet<>(Arrays.asList(C, D));
         assertEquals(
-            "C; D",
-            (
-                (JSONObject) new JSONParser()
-                    .parse(new MultiChoiceAnswer(selected).toJsonString())
-            ).get("text")
+            "C; D", new MultiChoiceAnswer(selected).toJson().get("text")
         );
     }
 

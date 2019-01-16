@@ -5,8 +5,9 @@ import com.github.aistomin.guitarist.Question;
 import com.github.aistomin.guitarist.domain.MusicSymbol;
 import com.github.aistomin.guitarist.simple.SimpleAnswer;
 import com.github.aistomin.guitarist.simple.SimpleQuestion;
+import com.github.aistomin.guitarist.simple.SimpleText;
 import java.util.List;
-import org.json.simple.parser.ParseException;
+import org.json.simple.JSONObject;
 
 /**
  * Created by aistomin on 05.10.18.
@@ -40,7 +41,7 @@ public final class SymbolsQuestion implements Question {
             );
         }
         this.simple = new SimpleQuestion(
-            question.toString(),
+            new SimpleText(question.toString()),
             new SimpleAnswer(String.valueOf(similar.indexOf(symbol)))
         );
     }
@@ -66,8 +67,8 @@ public final class SymbolsQuestion implements Question {
     }
 
     @Override
-    public String toJsonString() throws ParseException {
-        return simple.toJsonString();
+    public JSONObject toJson() {
+        return simple.toJson();
     }
 
     @Override

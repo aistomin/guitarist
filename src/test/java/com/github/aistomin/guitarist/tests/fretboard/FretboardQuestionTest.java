@@ -7,7 +7,6 @@ import com.github.aistomin.guitarist.Question;
 import com.github.aistomin.guitarist.domain.Guitar6Fretboard;
 import com.github.aistomin.guitarist.domain.Note;
 import com.github.aistomin.guitarist.simple.SimpleAnswer;
-import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -53,14 +52,12 @@ class FretboardQuestionTest {
 
     /**
      * Check the JSON serialisation works.
-     *
-     * @throws ParseException If JSON error occurred.
      */
     @Test
-    void toJsonString() throws ParseException {
+    void toJsonString() {
         assertTrue(
             new FretboardQuestion(Note.A, 2, new Guitar6Fretboard())
-                .toJsonString()
+                .toJson().toJSONString()
                 .contains("Which note do we have on the A string fret #2?")
         );
     }

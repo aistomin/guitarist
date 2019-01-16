@@ -20,19 +20,29 @@ final class TestQuestionsProvider implements QuestionsProvider {
      */
     TestQuestionsProvider() {
         items.add(
-            new SimpleQuestion("1 + 1 = ?", new SimpleAnswer("2"))
+            new SimpleQuestion(
+                new SimpleText("1 + 1 = ?"), new SimpleAnswer("2")
+            )
         );
         items.add(
-            new SimpleQuestion("3 + 6 = ?", new SimpleAnswer("9"))
+            new SimpleQuestion(
+                new SimpleText("3 + 6 = ?"), new SimpleAnswer("9")
+            )
         );
         items.add(
-            new SimpleQuestion("6 - 2 = ?", new SimpleAnswer("4"))
+            new SimpleQuestion(
+                new SimpleText("6 - 2 = ?"), new SimpleAnswer("4")
+            )
         );
         items.add(
-            new SimpleQuestion("2 * 2 = ?", new SimpleAnswer("4"))
+            new SimpleQuestion(
+                new SimpleText("2 * 2 = ?"), new SimpleAnswer("4")
+            )
         );
         items.add(
-            new SimpleQuestion("6 / 2 = ?", new SimpleAnswer("3"))
+            new SimpleQuestion(
+                new SimpleText("6 / 2 = ?"), new SimpleAnswer("3")
+            )
         );
     }
 

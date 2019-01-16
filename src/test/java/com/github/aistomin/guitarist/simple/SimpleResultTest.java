@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -153,21 +151,17 @@ class SimpleResultTest {
 
     /**
      * Check that we correctly convert the result to JSON string.
-     *
-     * @throws ParseException JSON parsing exception.
      */
     @Test
-    void toJsonString() throws ParseException {
+    void toJsonString() {
         final int total = 7;
         final int answered = 6;
         final int correct = 4;
         final int wrong = 2;
         final int percentage = 50;
-        final JSONObject json = (JSONObject) new JSONParser().parse(
-            new SimpleResult(
-                total, answered, correct, wrong, percentage
-            ).toJsonString()
-        );
+        final JSONObject json = new SimpleResult(
+            total, answered, correct, wrong, percentage
+        ).toJson();
         assertEquals(total, Integer.parseInt(json.get("total").toString()));
         assertEquals(
             answered, Integer.parseInt(json.get("answered").toString())
