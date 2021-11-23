@@ -1,2 +1,0 @@
-merge:
-  script: mvn clean install
